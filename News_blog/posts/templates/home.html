@@ -1,3 +1,4 @@
+{% load static %}
 {% include 'base.html' %}
 {% block  title%}
 <title>home</title>
@@ -8,7 +9,9 @@
 {% endblock  %}
 
     {% for post in posts %}
-        <h3> {{post.id}}|{{post.name}} </h3>
-        <h4> {{post.class}}
+        <h3> {{post.id}}|{{post.title}} </h3>
+        <h4> {{post.description}}
+            <img src = "{% static 'images/yash.jpg' %}" height=200 width=200>
+            <br>
     {% endfor %}
         

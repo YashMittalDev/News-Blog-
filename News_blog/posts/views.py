@@ -12,18 +12,18 @@ def greet(request:HttpRequest):
 posts = [
     {
         'id':1,
-        'name':'Yash Mittal',
-        'class':'BCA'
+        'title':'Yash Mittal',
+        'description':'BCA'
     },
     {
         'id':2,
-        'name':'Amit Mittal',
-        'class':'BCA'
+        'title':'Amit Mittal',
+        'description':'BCA'
     },
     {
         'id':3,
-        'name':'ankit sharma',
-        'class':'BCA'
+        'title':'ankit sharma',
+        'description':'BCA'
     }
 ]
 def show_post(request:HttpRequest):

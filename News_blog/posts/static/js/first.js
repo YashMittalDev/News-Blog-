@@ -1,0 +1,1 @@
+alert("You are using JS in Django")
