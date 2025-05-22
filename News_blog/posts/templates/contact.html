@@ -1,0 +1,12 @@
+{% include 'base.html' %}
+{% block  title%}
+<title>Contact</title>
+{% endblock  %}
+{% block heading %}
+<h1> Contact Page </h1>
+{% endblock  %}
+
+{% for post in posts %}
+        <h3> {{post.id}}|{{post.name}} </h3>
+        <h4> {{post.class}}
+{% endfor %}

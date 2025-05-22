@@ -1,0 +1,11 @@
+{% include 'base.html' %}
+{% block title %}
+<title>About</title>
+        {% endblock  %}
+{% block heading %}
+<h1> About Page </h1>
+{% endblock  %}
+    {% for post in posts %}
+        <h3> {{post.id}}|{{post.name}} </h3>
+        <h4> {{post.class}}
+    {% endfor %}
