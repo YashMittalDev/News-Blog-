@@ -2,10 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpRequest
 from .forms import PostCreationForm
 from .models import Post
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
-
-
-
 
 def greet(request:HttpRequest):
     name = request.GET.get("name") or "World"
@@ -56,6 +55,7 @@ def contact(request:HttpRequest):
     context = {}
     return render(request,"contact.html",context)
 
+@login_required
 def create_post(request:HttpRequest):
     '''
     form = PostCreationForm()
@@ -80,6 +80,7 @@ def create_post(request:HttpRequest):
     }
     return render(request,'create_post.html',context)
 
+
 def post_one(request:HttpRequest,post_id):
     post = Post.objects.get(pk=post_id)
     if post:
@@ -88,6 +89,7 @@ def post_one(request:HttpRequest,post_id):
         context={}
     return render(request,"post_one.html",context)
 
+@login_required
 def update(request:HttpRequest,post_id):
     post = Post.objects.get(pk=post_id)
     form = PostCreationForm(instance=post)
