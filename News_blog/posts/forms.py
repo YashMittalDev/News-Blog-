@@ -14,9 +14,22 @@ then create fields with the name you want or we can say the name within the mode
     when we create object of the class that means we have a form.
 
 '''
-from django import forms
+# from django import forms
 
-class PostCreationForm(forms.Form):
-    title = forms.CharField(max_length=225)
-    description = forms.CharField()
-    author = forms.CharField()
+# class PostCreationForm(forms.Form):
+#     title = forms.CharField(max_length=225)
+#     description = forms.CharField()
+#     author = forms.CharField()
+
+#--------------now with the help of model
+
+from django import forms
+from .models import Post
+class PostCreationForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':"form-control"}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'class':"form-control"}))
+    author = forms.CharField(widget=forms.TextInput(attrs={'class':"form-control"}))
+    
+    class Meta:
+        model = Post
+        fields = ['title','description','author','thumbnail']

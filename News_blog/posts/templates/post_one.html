@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>
+    One post 
+</title>
+{% endblock  %}
+
+{% block heading %}
+<h2>
+    Post No. {{post.id}}
+</h2>
+{% endblock  %}
+
+{% block content %}
+
+
+{{post.title}}
+{{post.description}}
+<br>
+<a href = "{% url 'update' post.id %}"> Update </a>
+{% endblock  %}
+
+

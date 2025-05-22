@@ -10,7 +10,8 @@
 
     {% for post in posts %}
         <h3> {{post.id}}|{{post.title}} </h3>
-        <h4> {{post.description}}
+        <h4> {{post.description}} </h4>
+                <a href="{% url 'post_one' post.id %}"> Show </a>
             <img src = "{% static 'images/yash.jpg' %}" height=200 width=200>
             <br>
     {% endfor %}

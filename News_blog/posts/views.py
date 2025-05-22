@@ -57,8 +57,8 @@ def contact(request:HttpRequest):
     return render(request,"contact.html",context)
 
 def create_post(request:HttpRequest):
+    '''
     form = PostCreationForm()
-    
     if request.method == "POST":
         title = request.POST['title']    
         author = request.POST['author']
@@ -66,8 +66,35 @@ def create_post(request:HttpRequest):
         new_post = Post(title=title,author=author,description=description)
         new_post.save()
         return redirect("posts_home")
-    
+    --this is when we create form without taking help of models and with models we do this.
+    '''
+
+    form = PostCreationForm()
+    if request.method == "POST":
+        form = PostCreationForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("posts_home")
     context = {
         "form":form
     }
     return render(request,'create_post.html',context)
+
+def post_one(request:HttpRequest,post_id):
+    post = Post.objects.get(pk=post_id)
+    if post:
+        context = {"post":post}
+    else:
+        context={}
+    return render(request,"post_one.html",context)
+
+def update(request:HttpRequest,post_id):
+    post = Post.objects.get(pk=post_id)
+    form = PostCreationForm(instance=post)
+    if request.method == "POST":
+        form = PostCreationForm(instance=post,data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('posts_home')
+    context={'form':form}
+    return render(request,"update.html",context)
