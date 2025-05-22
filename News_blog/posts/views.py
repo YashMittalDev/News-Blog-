@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpRequest
+from .forms import PostCreationForm
+from .models import Post
 # Create your views here.
 
 
@@ -9,23 +11,24 @@ def greet(request:HttpRequest):
     name = request.GET.get("name") or "World"
     return HttpResponse(f"Hello {name}")
 
-posts = [
-    {
-        'id':1,
-        'title':'Yash Mittal',
-        'description':'BCA'
-    },
-    {
-        'id':2,
-        'title':'Amit Mittal',
-        'description':'BCA'
-    },
-    {
-        'id':3,
-        'title':'ankit sharma',
-        'description':'BCA'
-    }
-]
+# posts = [
+#     {
+#         'id':1,
+#         'title':'Yash Mittal',
+#         'description':'BCA'
+#     },
+#     {
+#         'id':2,
+#         'title':'Amit Mittal',
+#         'description':'BCA'
+#     },
+#     {
+#         'id':3,
+#         'title':'ankit sharma',
+#         'description':'BCA'
+#     }
+# ] git commit -m "Form creation without importing Models filw"
+
 def show_post(request:HttpRequest):
     return HttpResponse(str(posts))
 
@@ -41,13 +44,30 @@ def index(request:HttpRequest):
     return render(request,"index.html",context)
 
 def home(request:HttpRequest):
+    posts = Post.objects.all()
     context = {"posts":posts}
     return render(request,"home.html",context)
 
 def about(request:HttpRequest):
-    context = {"posts":posts}
+    context = {}
     return render(request,"about.html",context)
 
 def contact(request:HttpRequest):
-    context = {"posts":posts}
+    context = {}
     return render(request,"contact.html",context)
+
+def create_post(request:HttpRequest):
+    form = PostCreationForm()
+    
+    if request.method == "POST":
+        title = request.POST['title']    
+        author = request.POST['author']
+        description = request.POST['description']
+        new_post = Post(title=title,author=author,description=description)
+        new_post.save()
+        return redirect("posts_home")
+    
+    context = {
+        "form":form
+    }
+    return render(request,'create_post.html',context)
