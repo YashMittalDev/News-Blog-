@@ -4,8 +4,16 @@
 <form action="" method='POST'>
     {% csrf_token %}
     
+
+        
     {% for field in form %}
         {{field.label}}{{ field }}
+            {% if field.errors %}
+                {% for error in field.errors  %}
+                    s<p> {{error}} </p>
+                {% endfor %}
+                
+    {% endif %}
     {% endfor %}
     <input type="submit" value="SignUp">
 </form>

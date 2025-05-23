@@ -10,18 +10,13 @@
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
 </head>
 <body>
-    
+    <a href="{% url 'posts_home' %}">Home</a>|
+    <a href="{% url 'about' %}">about</a>|
+    <a href="{% url 'contact' %}">contact</a>|
     {% if request.user.is_authenticated %}
     <a href="{% url 'log_out' %}">Logout</a>|
-    <a href="{% url 'posts_home' %}">Home</a>|
-    <a href="{% url 'about' %}">about</a>|
-    <a href="{% url 'contact' %}">contact</a>|
     <a href="{% url 'create_post' %}">Create</a>|
     {% else %}
-    <a href="{% url 'posts_home' %}">Home</a>|
-    <a href="{% url 'about' %}">about</a>|
-    <a href="{% url 'contact' %}">contact</a>|
-    <a href="{% url 'create_post' %}">Create</a>|
     <a href="{% url 'sign_up' %}">signup</a>|
     <a href="{% url 'login' %}">Login</a>|
     {% endif %}
